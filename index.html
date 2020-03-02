@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="base64.js" charset="utf-8"/></script>
+        <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+        <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <title>文档转换</title>
+    </head>
+    <body style="margin: 3%; font-size: 18px;">
+        <div id="info">
+            <p class="text-muted">提示：<a href="javascript:window.location.reload()">刷新本页面</a>可以进行新的编码解码操作。</p>
+            <p>字体调节  <input class="btn btn-default" id="increase" type="button" value="大"> <input class="btn btn-default" id="decrease" type="button" value="小"></p>
+            <p>主题调节  <span style="font-size: 25px;">
+                <span id="white" style="color:#fff">▄</span>
+                <span id="brown" style="color:rgb(255, 244, 186)">▄</span>
+                <span id="green" style="color:#b8dfa3">▄</span>
+                <span id="black" style="color:#101110">▄</span>
+            </span>
+            </p>
+            <p class="text-success">下面是正文部分。</p>
+            <hr/>
+        </div>
+        <div id="read">
+            <textarea id="text" rows="10" class="form-control" autofocus></textarea><br/>
+            <input class="btn btn-default" id="decode" type="submit" value="解码""/>
+            <input class="btn btn-default" id="encode" type="submit" value="编码"/>
+            <br/><br/>
+            <p class="text-info"><b>您若继续使用本页面，则意味着您默许及知晓以下内容。</b></p>
+            <small class="text-muted">
+                <p>您不得将本页面用于任何违背中华人民共和国法律、美国加利福尼亚洛杉矶地区法律的行为。</p>
+                <p class="text-danger">本页面不保证您所输入信息的安全性，仅提供编码解码服务。</p>
+                <p>请注意，算法透明公开，任何人都可以通过任意支持 <a href="https://baike.baidu.com/item/base64/8545775" target="_blank">Base64</a> 算法的编码程序解码出您所加密的字符。</p>
+                <br/>
+                <p>本页面所用到的开源项目：jQuery 、<a href="https://github.com/dankogai/js-base64" target="_blank">js-base64</a> 和 Bootstarp 。使用了 <a href="https://www.bootcdn.cn/" target="_blank">BootCDN</a> 加速。</p>
+            </small>
+        </div>
+        <script charset="utf-8">
+            $(document).ready(function(){
+                $("#info").hide();
+                $("#encode").click(function(){
+                    $("#read").fadeOut();
+                    $("#read").fadeIn();
+                    var text = $("#text").val();
+                    text = Base64.encode(text);
+                    document.getElementById("read").innerHTML = text;
+                    $("#info").show();
+                });
+                $("#decode").click(function(){
+                    $("#read").fadeOut();
+                    $("#read").fadeIn();
+                    var text = $("#text").val();
+                    text = Base64.decode(text);
+                    text = text.replace(/\\/g, "%");
+                    text = unescape(text);
+                    document.getElementById("read").innerHTML = text;
+                    $("#info").show();
+                });
+                //字号调节
+                var size;
+                size = Number($("body").css("font-size").slice(0,-2));
+                $("#increase").click(function(){
+                    size += 2;
+                    $("body").css({"font-size":size});
+                });
+                $("#decrease").click(function(){
+                    size -= 2;
+                    $("body").css({"font-size":size});
+                });
+                //颜色调节
+                var bgcolor,textc;
+                $("#white").click(function(){bgcolor="#fff";textc="#333";$("body").css({"background-color":bgcolor,"color":textc});});
+                $("#black").click(function(){bgcolor="#101110";textc="#eceeec";$("body").css({"background-color":bgcolor,"color":textc});});
+                $("#brown").click(function(){bgcolor="rgb(255, 244, 186)";textc="#512606";$("body").css({"background-color":bgcolor,"color":textc});});
+                $("#green").click(function(){bgcolor="#b8dfa3";textc="#22441b";$("body").css({"background-color":bgcolor,"color":textc});});
+            });
+        </script>
+        <script>
+            var _hmt = _hmt || [];
+            (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?034175f590f8745f3038e3f2756be2e8";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
+    </body>
+</html>
