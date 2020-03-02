@@ -4,3 +4,7 @@
 Base64.js 引用了 https://github.com/dankogai/js-base64 。
 
 目前已知问题：解码时会丢失换行数据。可以考虑用\<br\>代替。
+
+Demo : https://witcater.win/read/ 。
+
+使用愉快。
