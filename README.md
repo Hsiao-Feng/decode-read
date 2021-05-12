@@ -5,6 +5,6 @@
 
 Base64.js 引用了 https://github.com/dankogai/js-base64 。
 
-Demo : https://witcater.win/read/ 。
+Demo : https://hsiao-feng.github.io/decode-read/ 。
 
 使用愉快。
